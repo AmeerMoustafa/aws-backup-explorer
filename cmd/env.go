@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"aws-backup-explorer/utils"
+	"fmt"
 
 	"github.com/spf13/cobra"
 )
@@ -22,5 +23,11 @@ func init() {
 	root.AddCommand(envcmd)
 	envcmd.LocalFlags().String("accesskey", "", "Set your AWS access key")
 	envcmd.LocalFlags().String("secretkey", "", "Set your AWS secret key")
+
+	err := envcmd.MarkFlagRequired("accesskey")
+
+	if err != nil {
+		fmt.Printf("\033[31m[-] The Access Key field is a required field\033[0m\n\n")
+	}
 
 }
