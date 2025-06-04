@@ -1,8 +1,6 @@
 package main
 
-import (
-	"aws-backup-explorer/cmd"
-)
+import "aws-backup-explorer/cmd"
 
 func main() {
 	// err := godotenv.Load()
@@ -30,5 +28,7 @@ func main() {
 	// for _, b := range output.Buckets {
 	// 	fmt.Printf(" %s created on %s \n", aws.ToString(b.Name), aws.ToTime(b.CreationDate))
 	// }
+
 	cmd.Execute()
+
 }
