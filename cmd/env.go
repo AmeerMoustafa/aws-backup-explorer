@@ -19,15 +19,23 @@ var envcmd = &cobra.Command{
 	},
 }
 
+var envcheckcmd = &cobra.Command{
+	Use:   "check",
+	Short: "Check to see whether environment variables exist in the env file",
+	Long:  "Literally just Add and remove AWS credentials",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Mic check")
+
+	},
+}
+
 func init() {
 	root.AddCommand(envcmd)
+	envcmd.AddCommand(envcheckcmd)
 	envcmd.LocalFlags().String("accesskey", "", "Set your AWS access key")
 	envcmd.LocalFlags().String("secretkey", "", "Set your AWS secret key")
+	envcmd.Parent().MarkFlagRequired("accesskey")
 
-	err := envcmd.MarkFlagRequired("accesskey")
-
-	if err != nil {
-		fmt.Printf("\033[31m[-] The Access Key field is a required field\033[0m\n\n")
-	}
+	
 
 }
