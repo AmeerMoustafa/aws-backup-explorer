@@ -12,7 +12,10 @@ var envcmd = &cobra.Command{
 	Short: "Add and remove AWS credentials",
 	Long:  "Literally just Add and remove AWS credentials",
 	Run: func(cmd *cobra.Command, args []string) {
-		accesskey, _ := cmd.Flags().GetString("accesskey")
+		accesskey, err := cmd.Flags().GetString("accesskey")
+		if err != nil {
+			fmt.Println("[+] The access key flag is REQUIRED")
+		}
 		secretkey, _ := cmd.Flags().GetString("secretkey")
 		utils.SetEnvironment(accesskey, secretkey)
 
@@ -34,8 +37,6 @@ func init() {
 	envcmd.AddCommand(envcheckcmd)
 	envcmd.LocalFlags().String("accesskey", "", "Set your AWS access key")
 	envcmd.LocalFlags().String("secretkey", "", "Set your AWS secret key")
-	envcmd.Parent().MarkFlagRequired("accesskey")
-
-	
+	envcmd.MarkFlagRequired("accesskey")
 
 }
