@@ -21,3 +21,14 @@ func SetEnvironment(AccessKey string, SecretKey string) {
 		log.Fatal(err)
 	}
 }
+
+func ClearEnvironment() {
+	env_variables := map[string]string{
+		"AWS_ACCESS_KEY_ID":     "",
+		"AWS_SECRET_ACCESS_KEY": "",
+	}
+	err := godotenv.Write(env_variables, ".env")
+	if err != nil {
+		log.Fatal(err)
+	}
+}

@@ -1,6 +1,11 @@
 package main
 
-import "aws-backup-explorer/cmd"
+import (
+	"aws-backup-explorer/cmd"
+	"log"
+
+	"github.com/joho/godotenv"
+)
 
 func main() {
 	// err := godotenv.Load()
@@ -29,6 +34,20 @@ func main() {
 	// 	fmt.Printf(" %s created on %s \n", aws.ToString(b.Name), aws.ToTime(b.CreationDate))
 	// }
 
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatalf("Could not load environment file: %s", err)
+	}
+
 	cmd.Execute()
+
+	// layout := "20060102"
+
+	// t, err := time.Parse(layout, "20250524")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	// fmt.Println(t.Year())
 
 }
