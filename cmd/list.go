@@ -7,8 +7,8 @@ import (
 )
 
 var runcmd = &cobra.Command{
-	Use:   "run",
-	Short: "Run a DB lookup",
+	Use:   "list",
+	Short: "list a DB lookup",
 	Long:  "Literally just run a DB lookup",
 	Run: func(cmd *cobra.Command, args []string) {
 		app.GetBackups()
