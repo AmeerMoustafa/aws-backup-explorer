@@ -3,7 +3,6 @@ package cmd
 import (
 	"aws-backup-explorer/utils"
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -16,7 +15,7 @@ var envcmd = &cobra.Command{
 		accesskey, _ := cmd.Flags().GetString("accesskey")
 
 		secretkey, _ := cmd.Flags().GetString("secretkey")
-		utils.SetEnvironment(accesskey, secretkey)
+		utils.SetEnvironment(accesskey, secretkey, &utils.EnvironmentVariables)
 
 	},
 }
@@ -26,13 +25,12 @@ var envcheckcmd = &cobra.Command{
 	Short: "Check to see whether environment variables exist in the env file",
 	Long:  "Literally just Add and remove AWS credentials",
 	Run: func(cmd *cobra.Command, args []string) {
-		accesskey := os.Getenv("AWS_ACCESS_KEY_ID")
-		secretkey := os.Getenv("AWS_SECRET_ACCESS_KEY")
-		if accesskey == "" || secretkey == "" {
+
+		if utils.EnvironmentVariables.AccessKey == "" || utils.EnvironmentVariables.SecretKey == "" {
 			fmt.Println("Error: AWS credentials are missing, please add them using the env command")
 			return
 		} else {
-
+			fmt.Println("Environment variables are locked and loaded")
 		}
 
 	},
