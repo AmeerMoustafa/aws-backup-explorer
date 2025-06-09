@@ -13,6 +13,8 @@ func main() {
 
 	utils.EnvironmentVariables.LoadEnvVariables(EnvFile)
 
+	utils.LoadConfig()
+
 	cmd.Execute()
 
 	// layout := "20060102"
